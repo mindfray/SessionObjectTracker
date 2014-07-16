@@ -35,14 +35,10 @@ public class SerializableUtility {
     private static final Logger LOG = LogManager.getLogger(SerializableUtility.class);
 
     public static boolean isSerializable2(Object object) {
-        System.out.println(object.getClass().getName());
         boolean serializable = Serializable.class.isInstance(object);
-        System.out.println(serializable);
         if (serializable) {
-            System.out.print("going deeper  ");
             Class clazz = object.getClass();
             Field[] fields = clazz.getFields();
-            System.out.println(fields.length);
             for (Field field : fields) {
                 try {
                     field.setAccessible(true);
@@ -56,7 +52,6 @@ public class SerializableUtility {
                 }
             }
         }
-
         return serializable;
     }
 

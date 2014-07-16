@@ -15,8 +15,6 @@
  */
 package com.mindfray.tools.debug;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
