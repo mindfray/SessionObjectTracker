@@ -26,16 +26,16 @@ import org.apache.log4j.Logger;
  * @WebListener annotation. Tracks when objects are added, removed or replace
  * in the session logging the stack trace of the event.
  * <br/><br/>
- * Also checks if the object saved in the session is serializable.
+ * Also checks if the object saved in the session is serialisable.
  * <br/><br/>
  * If the logging level is set to debug always logs the stack trace.
  * <br/>
  * If the logging level is set to info always logs when a object is added, removed
  * or replaced in the session, but only logs the stack trace if the object is not
- * serializable.
+ * serialisable.
  * <br/>
  * If the logging level is set to warn only prints the event when an object is
- * not serializable. Also adds the stack trace.
+ * not serialisable. Also adds the stack trace.
  * 
  * @author Sam Tulip
  */
@@ -45,7 +45,7 @@ public class Listener implements HttpSessionAttributeListener {
     private static final Logger LOG = Logger.getLogger(Listener.class);
 
     /**
-     * Logs when an attribute is added. Checks if the object is serializable.
+     * Logs when an attribute is added. Checks if the object is serialisable.
      * @param event 
      */
     @Override
@@ -54,7 +54,7 @@ public class Listener implements HttpSessionAttributeListener {
     }
 
     /**
-     * Logs when an attribute is added. Checks if the object is serializable.
+     * Logs when an attribute is removed. Checks if the object is serialisable.
      * @param event 
      */
     @Override
@@ -63,7 +63,7 @@ public class Listener implements HttpSessionAttributeListener {
     }
 
     /**
-     * Logs when an attribute is added. Checks if the object is serializable.
+     * Logs when an attribute is replace. Checks if the object is serialisable.
      * @param event 
      */
     @Override
@@ -74,7 +74,7 @@ public class Listener implements HttpSessionAttributeListener {
     /**
      * Method to do the bulk of the work. The event type is passed from the 
      * other method in this class. Attribute name is always the name from the 
-     * event object and serializable is passed from the SerializableUtility.
+     * event object and serialisable is passed from the SerializableUtility.
      * @param eventType
      * @param attributeName
      * @param serializable 

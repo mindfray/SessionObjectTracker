@@ -20,7 +20,6 @@ import java.io.InvalidClassException;
 import java.io.NotSerializableException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -32,15 +31,15 @@ public class SerializableUtility {
     private static final Logger LOG = Logger.getLogger(SerializableUtility.class);
 
     /**
-     * Checks if an object is Serializable
-     * @param object The object we want to check if serializable
-     * @return true if the object can be serialized.
+     * Checks if an object is serialisable
+     * @param object The object we want to check if serialisable
+     * @return true if the object can be serialised.
      */
     public static boolean isSerializable(Object object) {
         /**
-         * This method checks if an object is serializable by serializing it to
+         * This method checks if an object is serialisable by serialising it to
          * a special output stream designed to do nothing. There are performance
-         * considerations serializing the object but as this tool is designed to 
+         * considerations serialising the object but as this tool is designed to 
          * aid debug the performance considerations can be ignored.
          */
         ObjectOutputStream out;
