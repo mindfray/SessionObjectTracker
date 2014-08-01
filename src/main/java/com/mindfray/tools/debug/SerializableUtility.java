@@ -20,42 +20,29 @@ import java.io.InvalidClassException;
 import java.io.NotSerializableException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.logging.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Sam Tulip
  */
 public class SerializableUtility {
+    
+    private static final Logger LOG = Logger.getLogger(SerializableUtility.class);
 
-    private static final Logger LOG = LogManager.getLogger(SerializableUtility.class);
-
-    public static boolean isSerializable2(Object object) {
-        boolean serializable = Serializable.class.isInstance(object);
-        if (serializable) {
-            Class clazz = object.getClass();
-            Field[] fields = clazz.getFields();
-            for (Field field : fields) {
-                try {
-                    field.setAccessible(true);
-                    Object sub = field.get(object);
-                    serializable = isSerializable2(sub);
-                    if (!serializable) {
-                        return serializable;
-                    }
-                } catch (IllegalArgumentException | IllegalAccessException ex) {
-                    LOG.error("Could not access " + field.getName() + " of object " + clazz.getName(), ex);
-                }
-            }
-        }
-        return serializable;
-    }
-
+    /**
+     * Checks if an object is Serializable
+     * @param object The object we want to check if serializable
+     * @return true if the object can be serialized.
+     */
     public static boolean isSerializable(Object object) {
+        /**
+         * This method checks if an object is serializable by serializing it to
+         * a special output stream designed to do nothing. There are performance
+         * considerations serializing the object but as this tool is designed to 
+         * aid debug the performance considerations can be ignored.
+         */
         ObjectOutputStream out;
         try {
             out = new ObjectOutputStream(new NoopOutputStream());
@@ -64,8 +51,7 @@ public class SerializableUtility {
             //we can't serialize this object
             return false;
         } catch (IOException ex) {
-            //should never happen
-            LOG.fatal("Failed to check serializable status");
+            LOG.error("Failed to check serializable status", ex);
             throw new RuntimeException("Failed to check serializable status");
         }
         return true;
